@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/colorPrimaryDark"
+    android:padding="20dip">
+
+    <ImageView
+        android:layout_width="349dp"
+        android:layout_height="456dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/inicio"
+
+        />
+
+    <TextView
+        android:layout_width="377dp"
+        android:layout_height="162dp"
+        android:fontFamily="casual"
+        android:text="BIENVENIDO A FRIENDLY TANK"
+        android:textAlignment="center"
+        android:textColor="#7AFFFFFF"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+

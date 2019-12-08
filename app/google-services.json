@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "488290779183",
+    "firebase_url": "https://veloster-a986d.firebaseio.com",
+    "project_id": "veloster-a986d",
+    "storage_bucket": "veloster-a986d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488290779183:android:00247673a77914746806da",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488290779183-vvoj7gq13bbjg904bnkasas082qco4v5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "4fcbc3b64159dfa023e9ac3e448a3dea216dd3ab"
+          }
+        },
+        {
+          "client_id": "488290779183-q386v1okfh4r5sr967tc82bd85dg0rne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcUEDiYzewInfuYlnTuLoAkJNjXTcLHns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488290779183-q386v1okfh4r5sr967tc82bd85dg0rne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
