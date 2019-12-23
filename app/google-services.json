@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "488290779183",
-    "firebase_url": "https://veloster-a986d.firebaseio.com",
-    "project_id": "veloster-a986d",
-    "storage_bucket": "veloster-a986d.appspot.com"
+    "project_number": "875356355847",
+    "firebase_url": "https://detecciontaquegasg7.firebaseio.com",
+    "project_id": "detecciontaquegasg7",
+    "storage_bucket": "detecciontaquegasg7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:488290779183:android:00247673a77914746806da",
+        "mobilesdk_app_id": "1:875356355847:android:d456c22c7fe471667099a2",
         "android_client_info": {
-          "package_name": "com.example.myapplication"
+          "package_name": "com.example.detecciontanquegas"
         }
       },
       "oauth_client": [
         {
-          "client_id": "488290779183-vvoj7gq13bbjg904bnkasas082qco4v5.apps.googleusercontent.com",
+          "client_id": "875356355847-4n4o4ueopdq09avhmiohju56bvm4fo1k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.myapplication",
-            "certificate_hash": "4fcbc3b64159dfa023e9ac3e448a3dea216dd3ab"
+            "package_name": "com.example.detecciontanquegas",
+            "certificate_hash": "42dff4f7a1b25f3a7a13c6ac2f47a2b7f3cebebd"
           }
         },
         {
-          "client_id": "488290779183-q386v1okfh4r5sr967tc82bd85dg0rne.apps.googleusercontent.com",
+          "client_id": "875356355847-meaefdi9i2rkha1dh1012ssk4m8jioal.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBcUEDiYzewInfuYlnTuLoAkJNjXTcLHns"
+          "current_key": "AIzaSyDjok-gWeIyVDRGylYBC-zJ141RzVSJLnQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "488290779183-q386v1okfh4r5sr967tc82bd85dg0rne.apps.googleusercontent.com",
+              "client_id": "875356355847-meaefdi9i2rkha1dh1012ssk4m8jioal.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

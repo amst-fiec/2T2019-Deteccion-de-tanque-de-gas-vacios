@@ -36,13 +36,5 @@
         android:paddingLeft="15dip"
         android:paddingRight="15dip"
         android:text="Registrarse" />
-    <Button
-        android:id="@+id/btnDatos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="datos"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:text="DATOS" />
+
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.detecciontanquegas;
 
 import android.content.Context;
 
