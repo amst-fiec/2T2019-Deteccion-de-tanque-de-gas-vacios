@@ -1,45 +1,36 @@
 {
   "project_info": {
-    "project_number": "875356355847",
-    "firebase_url": "https://detecciontaquegasg7.firebaseio.com",
-    "project_id": "detecciontaquegasg7",
-    "storage_bucket": "detecciontaquegasg7.appspot.com"
+    "project_number": "488290779183",
+    "firebase_url": "https://veloster-a986d.firebaseio.com",
+    "project_id": "veloster-a986d",
+    "storage_bucket": "veloster-a986d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:875356355847:android:d456c22c7fe471667099a2",
+        "mobilesdk_app_id": "1:488290779183:android:17bf358a1a3e22946806da",
         "android_client_info": {
           "package_name": "com.example.detecciontanquegas"
         }
       },
       "oauth_client": [
         {
-          "client_id": "875356355847-4n4o4ueopdq09avhmiohju56bvm4fo1k.apps.googleusercontent.com",
+          "client_id": "488290779183-qagb0h681n4qhas3995ron1j18h3t0ka.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.detecciontanquegas",
             "certificate_hash": "42dff4f7a1b25f3a7a13c6ac2f47a2b7f3cebebd"
           }
-        },
-        {
-          "client_id": "875356355847-meaefdi9i2rkha1dh1012ssk4m8jioal.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDjok-gWeIyVDRGylYBC-zJ141RzVSJLnQ"
+          "current_key": "AIzaSyAngvDCnCLkPg8Df_gWQTmBGxd-oLiUnrw"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "875356355847-meaefdi9i2rkha1dh1012ssk4m8jioal.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

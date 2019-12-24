@@ -65,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
         nAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
-                    finish();
-                }else{
+                if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this,"No se pudo iniciar sesion",Toast.LENGTH_SHORT).show();
 
+                } else {
+                    startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
+                    finish();
                 }
             }
         });
