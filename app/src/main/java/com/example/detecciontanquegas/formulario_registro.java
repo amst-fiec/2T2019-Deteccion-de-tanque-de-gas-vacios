@@ -9,9 +9,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,13 +29,12 @@ import java.util.Objects;
 
 public class formulario_registro extends AppCompatActivity {
 
-    private EditText editTextNAME, editTextEMAIL, editTextUSER, editTextPASSWORD;
+     EditText editTextNAME, editTextEMAIL, editTextUSER, editTextPASSWORD;
     //variables de los datos a registrar
-    private String name="";
-    private String email="";
-    private String user="";
-    private String password="";
+
+    Button buttonRegistrar;
     //variable para registro de usuario
+    //ProgressBar progressBar;
     FirebaseAuth nAuth;
     DatabaseReference nDatabase;
 
@@ -43,70 +44,61 @@ public class formulario_registro extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_registro);
 
 
+        nAuth = FirebaseAuth.getInstance();
+        //progressBar = findViewById(R.id.progressBar);
 
-        nAuth=FirebaseAuth.getInstance();
-        nDatabase= FirebaseDatabase.getInstance().getReference();
-        editTextNAME=(EditText)findViewById(R.id.editNombre);
-        editTextEMAIL=(EditText)findViewById(R.id.editEmail);
-        editTextUSER=(EditText)findViewById(R.id.editUsuario);
-        editTextPASSWORD=(EditText)findViewById(R.id.editClave);
-        Button buttonRegistrar = (Button) findViewById(R.id.btnGrabaregistro);
+        if (nAuth.getCurrentUser() != null) {
+            startActivity(new Intent(formulario_registro.this, RegistroExitoso.class));
+            finish();
+
+        }
+        nDatabase = FirebaseDatabase.getInstance().getReference();
+        editTextNAME = (EditText) findViewById(R.id.editNombre);
+        editTextEMAIL = (EditText) findViewById(R.id.editEmail);
+        editTextUSER = (EditText) findViewById(R.id.editUsuario);
+        editTextPASSWORD = (EditText) findViewById(R.id.editClave);
+        buttonRegistrar = (Button) findViewById(R.id.btnGrabaregistro);
+
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name=editTextNAME.getText().toString();
-                email=editTextEMAIL.getText().toString();
-                user=editTextUSER.getText().toString();
-                password=editTextPASSWORD.getText().toString();
+                String email = editTextEMAIL.getText().toString();
+                String password=editTextPASSWORD.getText().toString();
 
-                if(!name.isEmpty()&&!email.isEmpty()&&!user.isEmpty()&&!password.isEmpty()){
-                    //Firebase al menos 6 caracteres
-                    if(password.length()>=6){
-                        registrarUsuario();
-
-                    }else{
-                        Toast.makeText(formulario_registro.this,"Password al menos 6 caracteres ",Toast.LENGTH_SHORT).show();
-                    }
-                }else{
-                    Toast.makeText(formulario_registro.this,"Complete los campos",Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(email)){
+                    editTextEMAIL.setError("SE REQUIERE CORREO ELECTRONICO");
+                    return;
                 }
-            }
-        });
-    }
+                if(TextUtils.isEmpty(password)){
+                    editTextPASSWORD.setError("SE REQUIERE SU CONTRASEÑA");
+                    return;
+                }
+                if(password.length()<6){
+                    editTextPASSWORD.setError("Se necesita contraseña >= 6 caracteres");
+                    return;
+                }
+                //progressBar.setVisibility(View.VISIBLE);
 
+                //INICIO DE SESION CON FIREBASE
+                nAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(formulario_registro.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(formulario_registro.this,RegistroExitoso.class));
 
-    private void registrarUsuario(){
-        nAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Map<String,Object> map=new HashMap<>();
-                    map.put("name",name );
-                    map.put("email",email);
-                    map.put("user",user);
-                    map.put("password",password);
-                    String id= Objects.requireNonNull(nAuth.getCurrentUser()).getUid();
-                    nDatabase.child("Users").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if (task2.isSuccessful()){
-                                startActivity(new Intent(formulario_registro.this,RegistroExitoso.class));
-                                finish();
+                        }else{
+                            Toast.makeText(formulario_registro.this,"ERROR !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
 
-                           }else{
-                                Toast.makeText(formulario_registro.this,"No se pudo registrar datos correctamente",Toast.LENGTH_SHORT).show();
-
-                            }
                         }
-                    });
-
-                }else{
-                    Toast.makeText(formulario_registro.this,"No se pudo registrar usuario",Toast.LENGTH_SHORT).show();
-
-                }
+                    }
+                });
             }
         });
+
+
+
     }
 }
 
