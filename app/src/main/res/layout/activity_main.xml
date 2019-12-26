@@ -70,6 +70,9 @@
             android:paddingLeft="15dip"
             android:paddingRight="15dip"
             android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="#FE5274"
+            android:textSize="17sp"
 
              />
         <Button
@@ -83,6 +86,7 @@
             android:paddingLeft="15dip"
             android:paddingRight="15dip"
             android:text="Registrarse"
+
 
             />
     </LinearLayout>
