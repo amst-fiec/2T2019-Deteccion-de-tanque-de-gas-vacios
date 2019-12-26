@@ -4,18 +4,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="337dp"
         android:layout_height="328dp"
         android:layout_marginTop="8dp"
@@ -28,60 +30,63 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/txtUsuario"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:hint="Usuario"
+        android:orientation="vertical"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+        <EditText
+            android:id="@+id/txtUsuario"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Usuario"
+            android:background="@drawable/edit_text_top"
+            android:padding="12dp" />
 
-    <EditText
-        android:id="@+id/txtPasswd"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Clave"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551" />
+        <EditText
+            android:id="@+id/txtPasswd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Clave"
+            android:background="@drawable/edit_text_bottom"
+            android:padding="12dp" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="91dp"
-        android:layout_height="52dp"
-        android:layout_gravity="center_horizontal"
-        android:onClick="login"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642" />
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:onClick="login"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:text="Login"
 
-    <Button
-        android:id="@+id/btnRegistro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="56dp"
-        android:onClick="login"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:text="Registrarse"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.701" />
+             />
+        <Button
+            android:id="@+id/btnRegistro"
+
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button"
+            android:onClick="login"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:text="Registrarse"
+
+            />
+    </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -92,6 +97,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.532" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
