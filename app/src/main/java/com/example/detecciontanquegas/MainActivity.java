@@ -1,6 +1,8 @@
 package com.example.detecciontanquegas;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.text.TextUtils;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
     String password;
     //obtener informacion del usuario
     FirebaseAuth nAuth;
-
+    // atributos para el video
+    private VideoView videoBG;
+    MediaPlayer mMediaPlayer;
+    int mCurrentVideoPosition;
 
 
     @Override
@@ -41,7 +47,29 @@ public class MainActivity extends AppCompatActivity {
 
         nAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
-
+        progressBar.setVisibility(View.INVISIBLE);
+        videoBG = (VideoView) findViewById(R.id.videoView);
+        Uri uri = Uri.parse("android.resource://" // First start with this,
+                + getPackageName() // then retrieve your package name,
+                + "/" // add a slash,
+                + R.raw.smoke); // and then finally add your video resource. Make sure it is stored
+        // in the raw folder.
+        videoBG.setVideoURI(uri);
+        // Start the VideoView
+        videoBG.start();
+        videoBG.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mMediaPlayer = mediaPlayer;
+                // We want our video to play over and over so we set looping to true.
+                mMediaPlayer.setLooping(true);
+                // We then seek to the current posistion if it has been set and play the video.
+                if (mCurrentVideoPosition != 0) {
+                    mMediaPlayer.seekTo(mCurrentVideoPosition);
+                    mMediaPlayer.start();
+                }
+            }
+        });
         if(nAuth.getCurrentUser()!=null){
             startActivity(new Intent(MainActivity.this,RegistroExitoso.class));
             finish();
@@ -54,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 startActivity(new Intent(MainActivity.this, formulario_registro.class));
             }
         });
@@ -61,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 String email = txtUsuario.getText().toString();
                 String password=txtPasswd.getText().toString();
 
@@ -74,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 if(password.length()<6){
                     txtPasswd.setError("Se necesita contraseña >= 6 caracteres");
                 }
-                progressBar.setVisibility(View.VISIBLE);
+
 
                 //INICIO DE SESION CON FIREBASE
                 nAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -93,6 +123,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Capture the current video position and pause the video.
+        mCurrentVideoPosition = mMediaPlayer.getCurrentPosition();
+        videoBG.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Restart the video when resuming the Activity
+        videoBG.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // When the Activity is destroyed, release our MediaPlayer and set it to null.
+        mMediaPlayer.release();
+        mMediaPlayer = null;
     }
 }
 /*
