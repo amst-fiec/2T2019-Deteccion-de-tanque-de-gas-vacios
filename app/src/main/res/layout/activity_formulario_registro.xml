@@ -103,13 +103,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
+            android:fontFamily="sans-serif"
             android:padding="10dp"
             android:text="Already Have an Account?  Sign in"
             android:textAllCaps="true"
-            android:textSize="13dp"
-            android:textStyle="bold"
             android:textColor="#FAD0E1"
-            android:fontFamily="sans-serif"/>
+            android:textSize="13dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
