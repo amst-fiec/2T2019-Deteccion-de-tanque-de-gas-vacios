@@ -10,13 +10,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="349dp"
-        android:layout_height="456dp"
+        android:layout_width="374dp"
+        android:layout_height="573dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="200dp"
 
         android:scaleType="centerInside"
-        android:src="@drawable/mainlogo"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

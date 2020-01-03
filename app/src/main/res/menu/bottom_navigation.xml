@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_user"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="User"/>
+    <item
+        android:id="@+id/nav_gas"
+        android:icon="@drawable/ic_local_gas_station_black_24dp"
+        android:title="tank"/>
+    <item
+        android:id="@+id/nav_phone"
+        android:icon="@drawable/ic_local_phone_black_24dp"
+        android:title="Phone"/>
+    <item
+        android:id="@+id/nav_estadistic"
+        android:icon="@drawable/ic_insert_chart_black_24dp"
+        android:title="statics"/>
+</menu>

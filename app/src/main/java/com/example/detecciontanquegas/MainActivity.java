@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse("android.resource://" // First start with this,
                 + getPackageName() // then retrieve your package name,
                 + "/" // add a slash,
-                + R.raw.smoke); // and then finally add your video resource. Make sure it is stored
+                + R.raw.fire); // and then finally add your video resource. Make sure it is stored
         // in the raw folder.
         videoBG.setVideoURI(uri);
         // Start the VideoView
@@ -112,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(MainActivity.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this,RegistroExitoso.class));
+                            //startActivity(new Intent(MainActivity.this,RegistroExitoso.class));
+                            startActivity(new Intent(MainActivity.this,PantallaPrincipal.class));
 
                         }else{
                             Toast.makeText(MainActivity.this,"ERROR !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
