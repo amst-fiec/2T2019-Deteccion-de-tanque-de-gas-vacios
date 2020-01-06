@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,15 +19,18 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class formulario_registro extends AppCompatActivity {
 
@@ -36,7 +41,8 @@ public class formulario_registro extends AppCompatActivity {
     //variable para registro de usuario
     //ProgressBar progressBar;
     FirebaseAuth nAuth;
-    DatabaseReference nDatabase;
+    FirebaseDatabase database;
+    DatabaseReference myref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,9 @@ public class formulario_registro extends AppCompatActivity {
             finish();
 
         }
-        nDatabase = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance();
+        myref = database.getReference();
+
         editTextNAME = (EditText) findViewById(R.id.editNombre);
         editTextEMAIL = (EditText) findViewById(R.id.editEmail);
         editTextUSER = (EditText) findViewById(R.id.editUsuario);
@@ -68,37 +76,68 @@ public class formulario_registro extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(email)){
                     editTextEMAIL.setError("SE REQUIERE CORREO ELECTRONICO");
-                    return;
+                    editTextEMAIL.setFocusable(true);
                 }
-                if(TextUtils.isEmpty(password)){
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    editTextEMAIL.setError("Email Invalido");
+                    editTextEMAIL.setFocusable(true);
+                }
+                else if(TextUtils.isEmpty(password)){
                     editTextPASSWORD.setError("SE REQUIERE SU CONTRASEÑA");
-                    return;
+                    editTextPASSWORD.setFocusable(true);
                 }
-                if(password.length()<6){
+                else if(password.length()<6){
                     editTextPASSWORD.setError("Se necesita contraseña >= 6 caracteres");
-                    return;
+                    editTextPASSWORD.setFocusable(true);
                 }
                 //progressBar.setVisibility(View.VISIBLE);
 
                 //INICIO DE SESION CON FIREBASE
-                nAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(formulario_registro.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(formulario_registro.this,RegistroExitoso.class));
+                else{
+                    registerUser(email,password);
 
-                        }else{
-                            Toast.makeText(formulario_registro.this,"ERROR !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
+                }
             }
         });
 
 
 
+    }
+    private void registerUser(String email,String password){
+        nAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                            FirebaseUser user = nAuth.getCurrentUser();
+                            Toast.makeText(formulario_registro.this, "Registro exitoso",
+                                    Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(formulario_registro.this,PantallaPrincipal.class));
+
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                            Toast.makeText(formulario_registro.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // ...
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(formulario_registro.this, ""+e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        return super.onSupportNavigateUp();
     }
 }
 
