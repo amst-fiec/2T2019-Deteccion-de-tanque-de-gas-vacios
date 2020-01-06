@@ -35,7 +35,6 @@ import java.util.regex.Pattern;
 public class formulario_registro extends AppCompatActivity {
 
      EditText editTextNAME, editTextEMAIL, editTextUSER, editTextPASSWORD;
-    //variables de los datos a registrar
 
     Button buttonRegistrar;
     //variable para registro de usuario
@@ -51,6 +50,8 @@ public class formulario_registro extends AppCompatActivity {
 
 
         nAuth = FirebaseAuth.getInstance();
+        //Guardar informacion en la base de datos
+        final DatabaseReference nDatabase;
         //progressBar = findViewById(R.id.progressBar);
 
         if (nAuth.getCurrentUser() != null) {
@@ -67,13 +68,24 @@ public class formulario_registro extends AppCompatActivity {
         editTextPASSWORD = (EditText) findViewById(R.id.editClave);
         buttonRegistrar = (Button) findViewById(R.id.btnGrabaregistro);
 
-
+        //Accion del boton
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editTextEMAIL.getText().toString();
-                String password=editTextPASSWORD.getText().toString();
+                //variables de los datos a registrar
+                final String name=editTextNAME.getText().toString();
+                final String user=editTextUSER.getText().toString();
+                final String email = editTextEMAIL.getText().toString();
+                final String password=editTextPASSWORD.getText().toString();
 
+                if(TextUtils.isEmpty(name)){
+                    editTextNAME.setError("SE REQUIERE INGRESO SE SU NOMBRE");
+                    return;
+                }
+                if(TextUtils.isEmpty(user)){
+                    editTextUSER.setError("SE REQUIERE INGRESO DE UN USUARIO");
+                    return;
+                }
                 if(TextUtils.isEmpty(email)){
                     editTextEMAIL.setError("SE REQUIERE CORREO ELECTRONICO");
                     editTextEMAIL.setFocusable(true);
@@ -86,12 +98,18 @@ public class formulario_registro extends AppCompatActivity {
                     editTextPASSWORD.setError("SE REQUIERE SU CONTRASEÑA");
                     editTextPASSWORD.setFocusable(true);
                 }
+<<<<<<< HEAD
                 else if(password.length()<6){
+=======
+                //MODO DE AUTENTICACION EXIGE 6 AL MENOS 6 CARACTERES
+                if(password.length()<6){
+>>>>>>> 845a8a820f1f8b2876ae3b2965ba32d377259272
                     editTextPASSWORD.setError("Se necesita contraseña >= 6 caracteres");
                     editTextPASSWORD.setFocusable(true);
                 }
                 //progressBar.setVisibility(View.VISIBLE);
 
+<<<<<<< HEAD
                 //INICIO DE SESION CON FIREBASE
                 else{
                     registerUser(email,password);
@@ -126,6 +144,35 @@ public class formulario_registro extends AppCompatActivity {
                         }
 
                         // ...
+=======
+                //registro  de cuentas CON FIREBASE
+                nAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Map<String,Object> map=new HashMap<>();
+                            map.put("name",name );
+                            map.put("email",email);
+                            map.put("user",user);
+                            map.put("password",password);
+                            String id= Objects.requireNonNull(nAuth.getCurrentUser()).getUid();
+                            nDatabase.child("Users").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task2) {
+                                    if (task2.isSuccessful()){
+                                    Toast.makeText(formulario_registro.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(formulario_registro.this,RegistroExitoso.class));
+
+                                 }else{
+                                    Toast.makeText(formulario_registro.this,"ERROR !"+ task2.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                        });
+                                }else{
+                                    Toast.makeText(formulario_registro.this,"ERROR !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                }
+>>>>>>> 845a8a820f1f8b2876ae3b2965ba32d377259272
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

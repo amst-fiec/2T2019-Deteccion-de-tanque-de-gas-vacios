@@ -125,6 +125,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    //metodo para evitar que le sesion se cierre al cerrar la aplicacion
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //si el usuario ha iniciado sesion
+        FirebaseUser currentUser = nAuth.getCurrentUser();
+        if(currentUser!=null){
+                startActivity(new Intent(MainActivity.this,RegistroExitoso.class));
+
+        }
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
