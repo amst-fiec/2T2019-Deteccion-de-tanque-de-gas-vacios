@@ -90,7 +90,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:text="SIGN UP"
             android:textAllCaps="false"
-            android:textColor="#FE5274"
+            android:textColor="#2196F3"
             android:textSize="17sp"/>
 
         <TextView
@@ -103,7 +103,7 @@
             android:textAllCaps="true"
             android:textSize="13dp"
             android:textStyle="bold"
-            android:textColor="#FAD0E1"
+            android:textColor="#B2FAD0D0"
             android:fontFamily="sans-serif"/>
 
     </LinearLayout>

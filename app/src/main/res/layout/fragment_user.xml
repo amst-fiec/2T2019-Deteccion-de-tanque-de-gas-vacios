@@ -5,9 +5,18 @@
     android:background="@android:color/holo_red_light"
     >
     <TextView
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="user fragment"
         android:textSize="30sp"
         android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/logout_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@+id/username"
+        android:text="log out" />
 </RelativeLayout>

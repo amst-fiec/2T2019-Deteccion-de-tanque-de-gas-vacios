@@ -53,11 +53,7 @@ public class formulario_registro extends AppCompatActivity {
         nAuth = FirebaseAuth.getInstance();
         //progressBar = findViewById(R.id.progressBar);
 
-        if (nAuth.getCurrentUser() != null) {
-            startActivity(new Intent(formulario_registro.this, RegistroExitoso.class));
-            finish();
 
-        }
         database = FirebaseDatabase.getInstance();
         myref = database.getReference();
 
