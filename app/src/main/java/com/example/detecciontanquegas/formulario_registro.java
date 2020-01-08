@@ -36,12 +36,12 @@ public class formulario_registro extends AppCompatActivity {
 
      EditText editTextNAME, editTextEMAIL, editTextUSER, editTextPASSWORD;
     //variables de los datos a registrar
-
+    String email,nombre,password;
     Button buttonRegistrar;
     //variable para registro de usuario
     //ProgressBar progressBar;
     FirebaseAuth nAuth;
-    FirebaseDatabase database;
+    FirebaseDatabase nDatabase;
     DatabaseReference myref;
 
     @Override
@@ -54,12 +54,12 @@ public class formulario_registro extends AppCompatActivity {
         //progressBar = findViewById(R.id.progressBar);
 
 
-        database = FirebaseDatabase.getInstance();
-        myref = database.getReference();
+        nDatabase = FirebaseDatabase.getInstance();
+        myref = nDatabase.getReference();
 
         editTextNAME = (EditText) findViewById(R.id.editNombre);
         editTextEMAIL = (EditText) findViewById(R.id.editEmail);
-        editTextUSER = (EditText) findViewById(R.id.editUsuario);
+
         editTextPASSWORD = (EditText) findViewById(R.id.editClave);
         buttonRegistrar = (Button) findViewById(R.id.btnGrabaregistro);
 
@@ -67,9 +67,9 @@ public class formulario_registro extends AppCompatActivity {
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editTextEMAIL.getText().toString();
-                String password=editTextPASSWORD.getText().toString();
-
+                email = editTextEMAIL.getText().toString();
+                password=editTextPASSWORD.getText().toString();
+                nombre = editTextNAME.getText().toString();
                 if(TextUtils.isEmpty(email)){
                     editTextEMAIL.setError("SE REQUIERE CORREO ELECTRONICO");
                     editTextEMAIL.setFocusable(true);
@@ -90,7 +90,7 @@ public class formulario_registro extends AppCompatActivity {
 
                 //INICIO DE SESION CON FIREBASE
                 else{
-                    registerUser(email,password);
+                    registerUser();
 
                 }
             }
@@ -99,14 +99,27 @@ public class formulario_registro extends AppCompatActivity {
 
 
     }
-    private void registerUser(String email,String password){
+    private void registerUser(){
         nAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            Map<String,Object> map=new HashMap<>();
+                            map.put("name",nombre );
+                            map.put("email",email);
+                            map.put("password",password);
+                            String id= Objects.requireNonNull(nAuth.getCurrentUser()).getUid();
+                            myref.child("Users").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task2) {
+                                    if (!task2.isSuccessful()){
+                                        Toast.makeText(formulario_registro.this,"ERROR !"+ task2.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
+                            });
                             FirebaseUser user = nAuth.getCurrentUser();
                             Toast.makeText(formulario_registro.this, "Registro exitoso",
                                     Toast.LENGTH_SHORT).show();

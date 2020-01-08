@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
                             FirebaseUser user = nAuth.getCurrentUser();
                             startActivity(new Intent(MainActivity.this,PantallaPrincipal.class));
+                            finish();
+
                         } else {
                             // If sign in fails, display a message to the user.
 
