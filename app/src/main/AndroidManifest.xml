@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".PantallaPrincipal"></activity>
+        <activity android:name=".RegistroExitoso" />
         <activity
             android:name=".PantallaDeBienvenida"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -23,13 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".Services.MyFirebaseInstanceService">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-        </service>
         <activity
             android:name=".MainActivity"
+            tools:ignore="WrongManifestParent" />
+        <activity
+            android:name=".formulario_registro"
             tools:ignore="WrongManifestParent" />
         <activity
             android:name=".PantallaDatos"
