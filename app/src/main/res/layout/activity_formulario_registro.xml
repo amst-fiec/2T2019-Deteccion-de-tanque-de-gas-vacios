@@ -64,14 +64,6 @@
             android:padding="15dp" />
 
         <EditText
-            android:id="@+id/editUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_middle"
-            android:hint="Usuario"
-            android:inputType="textPersonName"
-            android:padding="15dp"/>
-        <EditText
             android:id="@+id/editClave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +82,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:text="SIGN UP"
             android:textAllCaps="false"
-            android:textColor="#FE5274"
+            android:textColor="#2196F3"
             android:textSize="17sp"/>
 
         <TextView
@@ -102,9 +94,16 @@
             android:padding="10dp"
             android:text="Already Have an Account?  Sign in"
             android:textAllCaps="true"
+<<<<<<< HEAD
             android:textColor="#FAD0E1"
             android:textSize="13dp"
             android:textStyle="bold" />
+=======
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textColor="#B2FAD0D0"
+            android:fontFamily="sans-serif"/>
+>>>>>>> luiszv
 
     </LinearLayout>
 

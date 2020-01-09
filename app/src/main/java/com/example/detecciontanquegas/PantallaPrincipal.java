@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class PantallaPrincipal extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
+    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +32,10 @@ public class PantallaPrincipal extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment selectedfragmente = null;
+                    Fragment selectedfragmente = new UserFrag(user);// para que empiece en USER
                     switch (menuItem.getItemId()){
                         case R.id.nav_user:
-                            selectedfragmente = new UserFrag();
+                            selectedfragmente = new UserFrag(user);
                             break;
                         case R.id.nav_gas:
                             selectedfragmente = new GasFrag();
@@ -53,7 +54,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                 }
             };
     private void checkUserStatus(){
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        user= firebaseAuth.getCurrentUser();
         if (user!= null){
             // el usuario ha iniciado sesion
         }
