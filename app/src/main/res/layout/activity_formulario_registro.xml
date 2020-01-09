@@ -94,16 +94,15 @@
             android:padding="10dp"
             android:text="Already Have an Account?  Sign in"
             android:textAllCaps="true"
-<<<<<<< HEAD
+
             android:textColor="#FAD0E1"
             android:textSize="13dp"
             android:textStyle="bold" />
-=======
+
             android:textSize="13dp"
             android:textStyle="bold"
             android:textColor="#B2FAD0D0"
             android:fontFamily="sans-serif"/>
->>>>>>> luiszv
 
     </LinearLayout>
 

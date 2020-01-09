@@ -30,9 +30,9 @@ import java.util.regex.Pattern;
 
 
 public class MainActivity extends AppCompatActivity {
-     EditText txtUsuario, txtPasswd;
-     Button btnLogin, btnRegistro;
-     TextView registrobtn;
+    EditText txtUsuario, txtPasswd;
+    Button btnLogin, btnRegistro;
+    TextView registrobtn;
     //datos para iniciar sesion
     String email;
     String password;
@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         registrobtn = (TextView) findViewById(R.id.signIn_text);
         registrobtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               startActivity(new Intent(MainActivity.this, formulario_registro.class));
-           }
-       });
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, formulario_registro.class));
+            }
+        });
 
 
 
@@ -154,18 +154,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    //metodo para evitar que le sesion se cierre al cerrar la aplicacion
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //si el usuario ha iniciado sesion
-        FirebaseUser currentUser = nAuth.getCurrentUser();
-        if(currentUser!=null){
-                startActivity(new Intent(MainActivity.this,RegistroExitoso.class));
-
-        }
-    }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -199,15 +187,12 @@ public class MainActivity extends AppCompatActivity {
     public void login(View view){
         String username= txtUsuario.getText().toString();
         String password=txtPasswd.getText().toString();
-
         nAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
                     Toast.makeText(MainActivity.this,"Hubo un error",Toast.LENGTH_LONG).show();
-
                 }else{
-
                 }
             }
         });
