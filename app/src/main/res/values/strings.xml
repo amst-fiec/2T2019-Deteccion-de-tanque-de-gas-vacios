@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Friendly Tank</string>
+    <string name="title_activity_cellphone_frag2">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
