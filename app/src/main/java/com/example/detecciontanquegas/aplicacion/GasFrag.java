@@ -57,6 +57,12 @@ public class GasFrag extends Fragment {
                 tanques = new ArrayList<>();
                 for (DataSnapshot dataSnap :dataSnapshot.getChildren()) {
                     Tanque valortanque = dataSnap.getValue(Tanque.class);
+                    int contador = 0;
+                    for(DataSnapshot dataSnapshot1: dataSnap.child("registros").getChildren()){
+                        contador++;
+                    }
+                    valortanque.setContador(contador);
+                    valortanque.setId(dataSnap.getKey());
                     tanques.add(valortanque);
                 }
                 MainAdapter adapter = new MainAdapter(getActivity(),imagengas,gasrojo,tanques);

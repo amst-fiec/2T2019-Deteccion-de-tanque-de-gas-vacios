@@ -55,13 +55,19 @@ public class MainAdapter extends BaseAdapter {
         ImageView imageView = convertView.findViewById(R.id.image_view);
         TextView textView = convertView.findViewById(R.id.text_view);
         String status = tanques.get(position).getEstado();
-        if (status.equals("lleno")){
-            imageView.setImageResource(imagengas);
+        int contador = tanques.get(position).getContador();
+        if (contador>1){
+            if (contador % 2!=0){
+                imageView.setImageResource(imagengas);
+            }
+            if (contador % 2==0){
+                imageView.setImageResource(gasrojo);
+            }
         }
-        if (status.equals("vacio")){
+        else {
             imageView.setImageResource(gasrojo);
         }
-        textView.setText(status);
+        textView.setText(tanques.get(position).getId());
         return convertView;
     }
 }
