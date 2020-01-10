@@ -11,23 +11,27 @@ import android.widget.TextView;
 
 import com.example.detecciontanquegas.R;
 
+import java.util.ArrayList;
+
 public class MainAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private String[] numberWord;
-    private int imagengas;
 
-    public MainAdapter(Context c, String[] numberWord, int imagengas){
+    private int imagengas,gasrojo;
+    private ArrayList<Tanque>tanques;
+
+    public MainAdapter(Context c, int imagengas,int gasrojo,ArrayList<Tanque>tanques){
         this.context = c;
-        this.numberWord =numberWord;
+        this.gasrojo = gasrojo;
         this.imagengas = imagengas;
+        this.tanques = tanques;
     }
 
 
     @Override
     public int getCount() {
-        return numberWord.length;
+        return tanques.size();
     }
 
     @Override
@@ -50,8 +54,14 @@ public class MainAdapter extends BaseAdapter {
         }
         ImageView imageView = convertView.findViewById(R.id.image_view);
         TextView textView = convertView.findViewById(R.id.text_view);
-        imageView.setImageResource(imagengas);
-        textView.setText(numberWord[position]);
+        String status = tanques.get(position).getEstado();
+        if (status.equals("lleno")){
+            imageView.setImageResource(imagengas);
+        }
+        if (status.equals("vacio")){
+            imageView.setImageResource(gasrojo);
+        }
+        textView.setText(status);
         return convertView;
     }
 }

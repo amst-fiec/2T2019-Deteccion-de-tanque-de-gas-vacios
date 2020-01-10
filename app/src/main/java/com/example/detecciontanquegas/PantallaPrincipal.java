@@ -38,7 +38,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                             selectedfragmente = new UserFrag(user);
                             break;
                         case R.id.nav_gas:
-                            selectedfragmente = new GasFrag();
+                            selectedfragmente = new GasFrag(user);
                             break;
                         case R.id.nav_estadistic:
                             selectedfragmente = new StaticFrag();
