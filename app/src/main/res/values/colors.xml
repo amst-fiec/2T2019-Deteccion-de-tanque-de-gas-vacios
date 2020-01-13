@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#1B96D8</color>
     <color name="colorAccent">#111111</color>
     <color name="colorBotttomView">#1B96D8</color>
+    <color name="back">#0A0A0A</color>
+    <color name="letra">#FFFFFF</color>
 </resources>
