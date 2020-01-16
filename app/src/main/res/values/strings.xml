@@ -2,5 +2,6 @@
     <string name="app_name">Friendly Tank</string>
     <string name="title_activity_cellphone_frag2">Map</string>
     <string name="title_activity_maps">Map</string>
+    <string name="default_web_client_id" translatable="false">488290779183-q386v1okfh4r5sr967tc82bd85dg0rne.apps.googleusercontent.com</string>
 
 </resources>

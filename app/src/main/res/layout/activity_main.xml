@@ -81,13 +81,13 @@
             />
 
         <Button
-            android:id="@+id/btnGoogle"
+            android:id="@+id/btn_login"
             android:layout_width="197dp"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:background="@drawable/button"
-            android:onClick="google"
+            android:onClick="iniciarSesion"
             android:paddingLeft="15dip"
             android:paddingRight="15dip"
             android:text="Sesion con Google"

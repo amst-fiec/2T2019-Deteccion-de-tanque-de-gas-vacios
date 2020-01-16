@@ -36,6 +36,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import static com.example.detecciontanquegas.R.string.default_web_client_id;
+
 
 public class MainActivity extends AppCompatActivity {
     EditText txtUsuario, txtPasswd;
@@ -52,10 +54,11 @@ public class MainActivity extends AppCompatActivity {
     int mCurrentVideoPosition;
 
     //para el inicio de sesion con google
-    static final int GOOGLE_SIGN_IN = 123;
+    private static final String TAG = "GoogleActivity";
+    private static final int RC_SIGN_IN = 9001;
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInOptions gso;
-    Button btn_google;
+    Button btn_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
         nAuth = FirebaseAuth.getInstance();
         //inicio de sesion con google
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -78,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 cerrarSesion();
             }
         }
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         Videothing(); // SOBRE EL VIDEO
 
@@ -102,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 String password = txtPasswd.getText().toString();
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     //invalid email patter set error
-                    txtUsuario.setError("Formato Incorrecto");
+                    txtUsuario.setError("POR FAVOR REVISE SUS CREDENCIALES");
                     txtUsuario.setFocusable(true);
                 } else if (TextUtils.isEmpty(email)) {
                     txtUsuario.setError("SE REQUIERE CORREO ELECTRONICO");
@@ -120,17 +125,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    //cerrar sesion de google
 
-    private void cerrarSesion() {
-        mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                MainActivity.this.updateUI(null);
-            }
-        });
-    }
-
+    //inicio de sesion con email y password creados
     private void loginUser(String email, String password) {
         nAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -213,30 +209,63 @@ public class MainActivity extends AppCompatActivity {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
+    //cerrar sesion de google
 
-    //funcion de incio de sesion
+    private void cerrarSesion() {
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                MainActivity.this.updateUI(null);
+            }
+        });
+    }
+
+    //funcion de incio de sesion con google
     public void iniciarSesion(View view) {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     /*Implementamos la función (sobrescrita) onActivityResult dentro de la clase publica MainActivity, que se ejecutara después verificar sesión. Obtendremos la información de sesión o mostraremos un error en el Log. Si el inicio de sesión ha fallado.*/
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GOOGLE_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(
-                    data);
+
+
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+
+        if (requestCode == RC_SIGN_IN) {
+
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
             try {
-                GoogleSignInAccount account =task.getResult(ApiException.class);
-                if (account != null)
-                    firebaseAuthWithGoogle(account);
+
+                // Google Sign In was successful, authenticate with Firebase
+
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                firebaseAuthWithGoogle(account);
 
             } catch (ApiException e) {
-                Log.w("TAG", "Fallo el inicio de sesión con google.", e);
-            }
-        }
-    }
 
+                // Google Sign In failed, update UI appropriately
+
+                Log.w(TAG, "Google sign in failed", e);
+
+                // [START_EXCLUDE]
+
+                updateUI(null);
+
+                // [END_EXCLUDE]
+
+            }
+
+        }
+
+    }
 
     //Autenticamos sesión con Firebase (para acceder a la base de datos)
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {

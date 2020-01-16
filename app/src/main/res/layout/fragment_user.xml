@@ -2,21 +2,68 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light"
+    android:background="@drawable/kitchen"
     >
+
+    <TextView
+        android:id="@+id/bienvenida"
+        style="@android:style/Widget.Holo.Light.TextView"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
+        android:fontFamily="cursive"
+        android:text="BIENVENIDO"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="#3F4A8A"
+        android:textColorLink="#3F51B5"
+        android:textSize="25dp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="210dp"
+        android:fontFamily="cursive"
+        android:text="user fragment"
+        android:textAlignment="center"
+        android:textColor="#3F51B5"
+        android:textSize="25dp" />
+
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="235dp"
+        android:fontFamily="cursive"
         android:text="user fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:textAlignment="center"
+        android:textColor="#3F51B5"
+        android:textColorLink="#FF5722"
+        android:textSize="25dp" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="162dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="370dp"
+
+        android:src="@drawable/cocinagif" />
 
     <Button
         android:id="@+id/logout_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="-280dp"
         android:layout_toStartOf="@+id/username"
         android:text="log out" />
 </RelativeLayout>
