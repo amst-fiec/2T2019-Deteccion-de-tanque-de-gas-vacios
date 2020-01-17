@@ -19,6 +19,7 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.detecciontanquegas.aplicacion.UserFrag;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     String password;
     //obtener informacion del usuario
     FirebaseAuth nAuth;
+    FirebaseUser user;
     // atributos para el video
     private VideoView videoBG;
     MediaPlayer mMediaPlayer;
@@ -91,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         txtPasswd = (EditText) findViewById(R.id.txtPasswd);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         registrobtn = (TextView) findViewById(R.id.signIn_text);
+
+
+
         registrobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
 
-                            FirebaseUser user = nAuth.getCurrentUser();
+                            //FirebaseUser user = nAuth.getCurrentUser();
+                           // if( nAuth.getCurrentUser()!=null){
                             startActivity(new Intent(MainActivity.this, PantallaPrincipal.class));
                             finish();
 
@@ -181,6 +187,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -204,11 +214,27 @@ public class MainActivity extends AppCompatActivity {
         mMediaPlayer = null;
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+
     }
+
+// manetener la sesion abierta aun que cierre la aplicacion
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //si el usuario ha iniciado sesion
+        FirebaseUser currentUser = nAuth.getCurrentUser();
+        if(currentUser!=null){
+            startActivity(new Intent(getApplicationContext(), RegistroExitoso.class));
+
+        }
+    }
+
     //cerrar sesion de google
 
     private void cerrarSesion() {

@@ -28,7 +28,7 @@ public class RegistroExitoso extends AppCompatActivity {
         btnDatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegistroExitoso.this, PantallaDatos.class));
+                startActivity(new Intent(RegistroExitoso.this, PantallaPrincipal.class));
 
             }
         });

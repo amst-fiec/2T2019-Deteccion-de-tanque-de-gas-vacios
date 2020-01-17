@@ -148,7 +148,9 @@ public class formulario_registro extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return super.onSupportNavigateUp();
     }
+
 }
+
 
    /* //insertarpaciente
     public void insertarpaciente(View v) {

@@ -12,6 +12,7 @@ import com.example.detecciontanquegas.aplicacion.CellphoneFrag;
 import com.example.detecciontanquegas.aplicacion.GasFrag;
 import com.example.detecciontanquegas.aplicacion.StaticFrag;
 import com.example.detecciontanquegas.aplicacion.UserFrag;
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,10 +54,11 @@ public class PantallaPrincipal extends AppCompatActivity {
                     return true;
                 }
             };
-    private void checkUserStatus(){
+   private void checkUserStatus(){
         user= firebaseAuth.getCurrentUser();
         if (user!= null){
             // el usuario ha iniciado sesion
+
         }
         else{
             // no ha iniciado sesion
@@ -71,3 +73,4 @@ public class PantallaPrincipal extends AppCompatActivity {
         super.onStart();
     }
 }
+

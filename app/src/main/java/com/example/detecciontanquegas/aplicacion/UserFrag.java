@@ -20,7 +20,7 @@ public class UserFrag extends Fragment {
 
     FirebaseUser user;
 
-    TextView username, name;
+    TextView username;
 
     Button logout;
     @Nullable
@@ -28,7 +28,7 @@ public class UserFrag extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_user,container,false);
         username = (TextView) v.findViewById(R.id.username);
-        name=(TextView) v.findViewById(R.id.name);
+
         //name.setText(user);
         username.setText(user.getEmail());
         logout = (Button) v.findViewById(R.id.logout_b);

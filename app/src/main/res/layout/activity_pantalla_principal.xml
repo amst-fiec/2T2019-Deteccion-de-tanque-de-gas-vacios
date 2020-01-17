@@ -9,27 +9,14 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="374dp"
-        android:layout_height="300dp"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="500dp"
         android:scaleType="centerInside"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/grupo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:fontFamily="cursive"
-        android:text="Friendly Tank  creado por CompMatics"
-        android:textAlignment="center"
-        android:textColor="#F9FAFD"
-        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/descripcion"
@@ -38,7 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
-        android:fontFamily="cursive"
+        android:fontFamily="@font/kotta_one"
         android:text="La aplicación móvil Friendly Tank brinda la ayuda de poder notificar cuando un tanque de gas se ha agotado, sin la necesidad de estar encendiendo las hornillas; además se podra ver en tiempo real con la ayuda de un hardware las variaciones de los diferentes tanque de gas que posee el uauario, incluso estadística de los registros. "
         android:textAlignment="center"
         android:textColor="#09090C"
@@ -49,8 +36,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_marginBottom="-110dp"
-        android:textAlignment="center" />
+        android:layout_marginBottom="6dp"
+        android:textAlignment="center" >
+
+        <TextView
+            android:id="@+id/grupo"
+            android:layout_width="400dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="300dp"
+            android:fontFamily="@font/nosifer"
+            android:text="Friendly Tank  creado por CompMatics"
+            android:textAlignment="center"
+            android:textColor="#F9FAFD"
+            android:textSize="10dp" />
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
