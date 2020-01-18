@@ -44,7 +44,7 @@
             android:layout_width="400dp"
             android:layout_height="33dp"
             android:layout_marginTop="300dp"
-            android:fontFamily="@font/nosifer"
+            android:fontFamily="@font/kotta_one"
             android:text="Friendly Tank  creado por CompMatics"
             android:textAlignment="center"
             android:textColor="#F9FAFD"
