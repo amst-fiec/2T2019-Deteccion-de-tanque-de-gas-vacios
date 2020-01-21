@@ -36,7 +36,6 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
         <activity android:name=".PantallaPrincipal" />
-        <activity android:name=".RegistroExitoso" />
         <activity
             android:name=".PantallaDeBienvenida"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -51,9 +50,6 @@
             tools:ignore="WrongManifestParent" />
         <activity
             android:name=".formulario_registro"
-            tools:ignore="WrongManifestParent" />
-        <activity
-            android:name=".PantallaDatos"
             tools:ignore="WrongManifestParent" />
     </application>
 

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.detecciontanquegas.MainActivity;
 import com.example.detecciontanquegas.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class UserFrag extends Fragment {
@@ -32,6 +33,7 @@ public class UserFrag extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getActivity(), MainActivity.class));
                 getActivity().finish();
             }

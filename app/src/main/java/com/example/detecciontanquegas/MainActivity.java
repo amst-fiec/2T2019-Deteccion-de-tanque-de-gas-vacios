@@ -182,6 +182,20 @@ public class MainActivity extends AppCompatActivity {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //si el usuario ha iniciado sesion
+        FirebaseUser currentUser = nAuth.getCurrentUser();
+        if(currentUser!=null){
+            startActivity(new Intent(getApplicationContext(), PantallaPrincipal.class));
+
+        }
+    }
+
+
+
 }
 /*
     public void login(View view){
