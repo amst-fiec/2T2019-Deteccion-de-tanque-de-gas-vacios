@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.detecciontanquegas.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,13 +25,15 @@ public class CellphoneFrag extends Fragment implements OnMapReadyCallback {
     GoogleMap map;
 
     SupportMapFragment mapFragment;
+    //localizacion a tiempo real
+    private FusedLocationProviderClient mFusedLocationClient;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
+        //inicializando
+       // mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
         View view= inflater.inflate(R.layout.fragment_cellphone,container,false);
