@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         Videothing(); // SOBRE EL VIDEO
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.google_app_id)).requestEmail()
+                .requestIdToken(getString(R.string.gcm_defaultSenderId)).requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
