@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -27,6 +30,14 @@ public class PantallaPrincipal extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navlistener);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("10", "Nuevo estado", importance);
+            channel.setDescription("Alertas de nuevo dato");
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -38,7 +49,9 @@ public class PantallaPrincipal extends AppCompatActivity {
                             selectedfragmente = new UserFrag(user);
                             break;
                         case R.id.nav_gas:
-                            selectedfragmente = new GasFrag(user);
+                            selectedfragmente = new GasFrag(user, getBaseContext());
+
+
                             break;
                         case R.id.nav_estadistic:
                             selectedfragmente = new StaticFrag();

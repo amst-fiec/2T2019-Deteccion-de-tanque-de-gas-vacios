@@ -1,6 +1,10 @@
 package com.example.detecciontanquegas.aplicacion;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import android.content.Context;
+
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.detecciontanquegas.R;
@@ -29,10 +37,13 @@ public class GasFrag extends Fragment {
     FirebaseUser user;
     DatabaseReference db_reference;
     GridView gridView;
+    Context context;
     ArrayList<Tanque> tanques;
     String [] numberWord= {"One","Two","Three","For","Five","six","seven","eight","nine","ten","eleven","twelve"};
     int imagengas = R.drawable.gaspic;
     int gasrojo = R.drawable.gasrojo;
+    NotificationManagerCompat notificationManager;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,13 +52,12 @@ public class GasFrag extends Fragment {
         db_reference = FirebaseDatabase.getInstance().getReference();
 
         getuserMap();
-
-
-
+        notificationManager = NotificationManagerCompat.from(context);
         return v;
     }
-    public GasFrag(FirebaseUser user){
+    public GasFrag(FirebaseUser user, Context context){
         this.user=user;
+        this.context=context;
     }
 
     public void getuserMap(){
@@ -64,7 +74,26 @@ public class GasFrag extends Fragment {
                     valortanque.setContador(contador);
                     valortanque.setId(dataSnap.getKey());
                     tanques.add(valortanque);
+                    String mensaje = "Tanque: "+ valortanque.getId() + " Estado: ";
+                    if (contador>1){
+                        if (contador % 2!=0){
+                            mensaje += "lleno";
+                        }
+                        if (contador % 2==0){
+                            mensaje += "vacio";
+                        }
+                    } else {
+                        mensaje += "vacio";
+                    }
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "10")
+                            .setSmallIcon(R.mipmap.ic_launcher_round)
+                            .setContentTitle("Aviso nuevo.")
+                            .setAutoCancel(false)    //swipe for delete
+                            .setContentText(mensaje);
+                    Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show();
+                    notificationManager.notify(Integer.valueOf(valortanque.getId()), builder.build());
                 }
+
                 MainAdapter adapter = new MainAdapter(getActivity(),imagengas,gasrojo,tanques);
                 gridView.setAdapter(adapter);
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

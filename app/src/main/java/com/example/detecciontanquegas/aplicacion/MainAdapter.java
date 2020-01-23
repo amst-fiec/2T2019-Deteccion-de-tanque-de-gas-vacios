@@ -1,6 +1,12 @@
 package com.example.detecciontanquegas.aplicacion;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +15,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+
+
 import com.example.detecciontanquegas.R;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Random;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
+
+
+
 
 public class MainAdapter extends BaseAdapter {
 
@@ -20,6 +39,9 @@ public class MainAdapter extends BaseAdapter {
 
     private int imagengas,gasrojo;
     private ArrayList<Tanque>tanques;
+    NotificationCompat.Builder mBuilder;
+
+
 
     public MainAdapter(Context c, int imagengas,int gasrojo,ArrayList<Tanque>tanques){
         this.context = c;
@@ -59,9 +81,12 @@ public class MainAdapter extends BaseAdapter {
         if (contador>1){
             if (contador % 2!=0){
                 imageView.setImageResource(imagengas);
+
+
             }
             if (contador % 2==0){
                 imageView.setImageResource(gasrojo);
+
             }
         }
         else {
@@ -70,4 +95,6 @@ public class MainAdapter extends BaseAdapter {
         textView.setText(tanques.get(position).getId());
         return convertView;
     }
+
+
 }
