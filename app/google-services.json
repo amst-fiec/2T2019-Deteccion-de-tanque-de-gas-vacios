@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "488290779183-sd8ect54mtu90qliifhpki5qi0ficjr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.detecciontanquegas",
+            "certificate_hash": "4fcbc3b64159dfa023e9ac3e448a3dea216dd3ab"
+          }
+        },
+        {
           "client_id": "488290779183-0eh2a5o887ejq4i781pbgnh0dveesp9r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
