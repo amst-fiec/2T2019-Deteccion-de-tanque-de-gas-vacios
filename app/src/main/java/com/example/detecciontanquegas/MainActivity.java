@@ -33,10 +33,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
 import java.util.regex.Pattern;
 
 
@@ -71,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         Videothing(); // SOBRE EL VIDEO
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.gcm_defaultSenderId)).requestEmail()
+                .requestIdToken(getString(R.string.google_app_id)).requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
@@ -202,43 +199,12 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = nAuth.getCurrentUser();
-                    if(task.getResult().getAdditionalUserInfo().isNewUser()){
-                        //Obtengo el email y el id del usuario ingresado
-                        String userEmail = user.getEmail();
-                        String uid = user.getUid();
-                        String nombre = user.getDisplayName();
-                        //String nombres = user.getDisplayName();
-                        //String nombre=acct.getGivenName().toString().toUpperCase();
-                        //String apellido=acct.getFamilyName().toString().toUpperCase();
-                        //Uri urlFoto= acct.getPhotoUrl()
-                        //String telefono = user.getPhoneNumber();
-                        //String tipoCuenta = getIntent().getStringExtra("tipo de cuenta");
-
-                        //Guardo en un HashMap
-                        HashMap<Object,String> hashMap = new HashMap<>();
-
-                        hashMap.put("email",userEmail);
-
-                        hashMap.put("name",nombre);
-                        //Instancia de Firebase
-                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference reference = database.getReference("Users");
-                        //reference.child(uid).setValue(hashMap);
-                    }
                     startActivity(new Intent(MainActivity.this,PantallaPrincipal.class));
                     finish();
-                    //updateUI(user);
+                } else {
+                    System.out.println("error");
+                    //MainActivity.this.updateUI(null);
                 }
-                else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(MainActivity.this, "Fallo en inicio de sesion",
-                            Toast.LENGTH_SHORT).show();
-                    //updateUI(null);
-                }
-
-
-
-
             }
         });
     }
